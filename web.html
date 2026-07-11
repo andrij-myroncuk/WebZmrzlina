@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Zmrzka & Espresso u Betléma | Třebechovice pod Orebem</title>
+    <style>
+        /* Základní styly a barvy ladící s brandem */
+        :root {
+            --bg-color: #fbf6ec; /* Smetanový podklad */
+            --box-bg: #fffdf9;
+            --accent-color: #f7e6c4; /* Jemná žlutá/krémová pro zmrzlinu */
+            --coffee-accent: #edd6bf; /* Kávově béžová pro kávové menu */
+            --text-color: #1a1a1a;
+            --text-muted: #555555;
+            --whatsapp-color: #25D366;
+            --border-color: #000000;
+        }
+
+        body {
+            font-family: 'Noteworthy', 'Chalkboard SE', 'Comic Sans MS', sans-serif;
+            font-weight: 300; /* Light pro běžné texty */
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            margin: 0;
+            padding: 0;
+            line-height: 1.4;
+        }
+
+        /* Nastavení Bold pro všechny nadpisy */
+        h1, h2, h3, .menu-item-name, .menu-item-price, .flavors-list {
+            font-family: 'Noteworthy', 'Chalkboard SE', 'Comic Sans MS', sans-serif;
+            font-weight: 700; /* Bold pro nadpisy a důležité prvky */
+        }
+
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+            box-sizing: border-box;
+        }
+
+        /* Sekce 1: Hlavička a Logo */
+        header {
+            text-align: center;
+            padding: 30px 10px;
+        }
+
+        .logo-placeholder {
+            width: 120px;
+            height: 120px;
+            background-color: #fff;
+            border: 2px solid var(--border-color);
+            border-radius: 50%;
+            margin: 0 auto 20px auto;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 14px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+        }
+
+        h1 {
+            font-size: 28px;
+            margin: 0;
+            padding: 0 10px;
+            line-height: 1.2;
+        }
+
+        .subtitle {
+            font-size: 18px;
+            color: var(--text-muted);
+            margin-top: 10px;
+        }
+
+        /* Sekce 2: Dnes točíme & Ceník zmrzliny */
+        .ice-cream-section {
+            background-color: var(--accent-color);
+            border-radius: 12px;
+            padding: 25px 20px;
+            margin: 30px 0 20px 0;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.03);
+        }
+
+        .ice-cream-section h2 {
+            font-size: 32px;
+            margin-top: 0;
+            margin-bottom: 15px;
+            text-align: center;
+        }
+
+        .flavor-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 20px;
+            margin-bottom: 20px;
+            border-bottom: 2px dashed rgba(0,0,0,0.1);
+            padding-bottom: 20px;
+        }
+
+        .ice-cream-icons {
+            font-size: 50px;
+            display: flex;
+            gap: 5px;
+        }
+
+        .flavors-list {
+            text-align: left;
+            font-size: 24px;
+        }
+
+        .flavors-list div {
+            margin: 5px 0;
+        }
+
+        /* Ceník zmrzliny uvnitř sekce */
+        .ice-cream-price-list {
+            max-width: 400px;
+            margin: 0 auto;
+        }
+
+        /* Společné kávové menu styly */
+        .menu-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .menu-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            margin-bottom: 10px;
+            font-size: 20px;
+        }
+
+        .menu-item-dots {
+            flex-grow: 1;
+            border-bottom: 2px dotted rgba(0,0,0,0.15);
+            margin: 0 10px;
+        }
+
+        /* Sekce 3: Kávové menu */
+        .coffee-section {
+            background-color: var(--coffee-accent);
+            border-radius: 12px;
+            padding: 25px 20px;
+            margin: 0 0 30px 0;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.03);
+        }
+
+        .coffee-section h2 {
+            font-size: 30px;
+            margin-top: 0;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        /* Sekce 4: Facebook Feed */
+        .facebook-section {
+            text-align: center;
+            margin: 40px 0;
+        }
+
+        .facebook-section h2 {
+            font-size: 24px;
+            margin-bottom: 20px;
+        }
+
+        .fb-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+
+        .fb-placeholder-box {
+            background-color: #eee;
+            aspect-ratio: 1 / 1;
+            border-radius: 8px;
+            border: 1px solid #ddd;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 14px;
+            color: #888;
+            font-style: italic;
+        }
+
+        .btn-secondary {
+            display: inline-block;
+            background: transparent;
+            border: 1px solid var(--border-color);
+            padding: 8px 20px;
+            border-radius: 20px;
+            text-decoration: none;
+            color: var(--text-color);
+            font-size: 16px;
+            font-weight: 700;
+        }
+
+        /* Sekce 5: Kontakt a Mapa */
+        .contact-section {
+            background-color: var(--box-bg);
+            border-radius: 12px;
+            padding: 25px;
+            margin-top: 40px;
+            border: 1px solid #eee;
+        }
+
+        .contact-section h2 {
+            font-size: 26px;
+            margin-top: 0;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .contact-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 20px;
+        }
+
+        @media(min-width: 480px) {
+            .contact-grid {
+                grid-template-columns: 1.2fr 1fr;
+            }
+        }
+
+        .map-placeholder {
+            background-color: #e5e3df;
+            border-radius: 8px;
+            height: 180px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            font-size: 16px;
+            border: 1px solid #ccc;
+        }
+
+        .info-box {
+            font-size: 18px;
+        }
+
+        .info-box h3 {
+            margin: 0 0 5px 0;
+            font-size: 18px;
+        }
+
+        .info-box p {
+            margin: 0 0 15px 0;
+            color: var(--text-muted);
+        }
+
+        /* WhatsApp Tlačítko */
+        .whatsapp-btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: var(--whatsapp-color);
+            color: white;
+            text-decoration: none;
+            padding: 12px;
+            border-radius: 8px;
+            font-weight: bold;
+            font-size: 18px;
+            text-align: center;
+            margin-top: 15px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+
+        /* Patička s legislativou */
+        footer {
+            text-align: center;
+            padding: 30px 10px;
+            font-size: 13px;
+            color: #999;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+
+        <!-- 1. HLAVIČKA -->
+        <header>
+            <div class="logo-placeholder">
+                LOGO ZDE
+            </div>
+            <h1>Zmrzka & Espresso u Betléma</h1>
+            <div class="subtitle">Poctivá točená zmrzlina a výběrová káva na náměstí v Třebechovicích.</div>
+        </header>
+
+        <!-- 2. DNES TOČÍME & CENY ZMRZLINY -->
+        <section class="ice-cream-section">
+            <h2>Dnes točíme 🍦</h2>
+            <div class="flavor-container">
+                <div class="ice-cream-icons">🍦🍧</div>
+                <div class="flavors-list">
+                    <div>Opočenská Vanilka</div>
+                    <div>Ostružinový Sorbet</div>
+                </div>
+            </div>
+            
+            <!-- Ceník zmrzliny přímo pod příchutěmi -->
+            <ul class="menu-list ice-cream-price-list">
+                <li class="menu-item">
+                    <span class="menu-item-name">Malá zmrzlina</span>
+                    <span class="menu-item-dots"></span>
+                    <span class="menu-item-price">35 Kč</span>
+                </li>
+                <li class="menu-item">
+                    <span class="menu-item-name">Velká zmrzlina</span>
+                    <span class="menu-item-dots"></span>
+                    <span class="menu-item-price">45 Kč</span>
+                </li>
+            </ul>
+        </section>
+
+        <!-- 3. KÁVOVÉ MENU (Všechny běžné variace kávy) -->
+        <section class="coffee-section">
+            <h2>Naše Káva ☕</h2>
+            <ul class="menu-list">
+                <li class="menu-item">
+                    <span class="menu-item-name">Espresso</span>
+                    <span class="menu-item-dots"></span>
+                    <span class="menu-item-price">45 Kč</span>
+                </li>
+                <li class="menu-item">
+                    <span class="menu-item-name">Espresso Macchiato</span>
+                    <span class="menu-item-dots"></span>
+                    <span class="menu-item-price">49 Kč</span>
+                </li>
+                <li class="menu-item">
+                    <span class="menu-item-name">Lungo / Americano</span>
+                    <span class="menu-item-dots"></span>
+                    <span class="menu-item-price">49 Kč</span>
+                </li>
+                <li class="menu-item">
+                    <span class="menu-item-name">Cappuccino</span>
+                    <span class="menu-item-dots"></span>
+                    <span class="menu-item-price">59 Kč</span>
+                </li>
+                <li class="menu-item">
+                    <span class="menu-item-name">Café Latte</span>
+                    <span class="menu-item-dots"></span>
+                    <span class="menu-item-price">65 Kč</span>
+                </li>
+                <li class="menu-item">
+                    <span class="menu-item-name">Flat White</span>
+                    <span class="menu-item-dots"></span>
+                    <span class="menu-item-price">75 Kč</span>
+                </li>
+                <li class="menu-item">
+                    <span class="menu-item-name">Ledová káva se zmrzlinou</span>
+                    <span class="menu-item-dots"></span>
+                    <span class="menu-item-price">79 Kč</span>
+                </li>
+            </ul>
+        </section>
+
+        <!-- 4. LIVE FACEBOOK FEED -->
+        <section class="facebook-section">
+            <h2>Živě z našeho Facebooku <span>f</span></h2>
+            <div class="fb-grid">
+                <div class="fb-placeholder-box">Foto stánku</div>
+                <div class="fb-placeholder-box">Foto Latte Art</div>
+                <div class="fb-placeholder-box">Dnešní zmrzka</div>
+            </div>
+            <a href="#" class="btn-secondary">Sledujte nás na Facebooku</a>
+        </section>
+
+        <!-- 5. KONTAKT & WHATSAPP -->
+        <section class="contact-section">
+            <h2>Kontakt & WhatsApp</h2>
+            <div class="contact-grid">
+                <div class="map-placeholder">
+                    📍 Masarykovo náměstí<br>Třebechovice pod Orebem<br>(Vedle muzea)
+                </div>
+                <div class="info-box">
+                    <h3>Kde nás najdete:</h3>
+                    <p>Masarykovo náměstí,<br>Třebechovice pod Orebem</p>
+                    
+                    <h3>Otevírací doba:</h3>
+                    <p>Pondělí - Neděle<br>10:00 - 18:00</p>
+                </div>
+            </div>
+
+            <a href="https://wa.me/420XXXXXXXXX" class="whatsapp-btn" target="_blank">
+                Objednat kávu s sebou / Napište nám na WhatsApp
+            </a>
+        </section>
+
+        <!-- LEGISLATIVNÍ PATIČKA -->
+        <footer>
+            <p>© 2026 Zmrzka & Espresso u Betléma. Všechna práva vyhrazena.</p>
+            <p>Provozovatel: [Tvoje Jméno / Název s.r.o.] | IČO: [Tvoje IČO]</p>
+        </footer>
+
+    </div>
+
+</body>
+</html>
