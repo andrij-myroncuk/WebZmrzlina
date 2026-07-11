@@ -4,6 +4,16 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Zmrzka & Espresso u Betléma | Třebechovice pod Orebem</title>
+    <meta name="description" content="Poctivá točená zmrzlina a výběrová káva na Masarykově náměstí v Třebechovicích pod Orebem. Otevřeno denně 10:00–18:00.">
+
+    <!-- Open Graph tagy pro hezký náhled při sdílení na Facebooku/WhatsAppu -->
+    <meta property="og:title" content="Zmrzka & Espresso u Betléma">
+    <meta property="og:description" content="Poctivá točená zmrzlina a výběrová káva na náměstí v Třebechovicích pod Orebem.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://TVOJE-JMENO.github.io/TVUJ-REPOZITAR/">
+    <meta property="og:image" content="https://TVOJE-JMENO.github.io/TVUJ-REPOZITAR/og-image.jpg">
+
+    <link rel="icon" href="favicon.png" type="image/png">
     <style>
         /* Základní styly a barvy ladící s brandem */
         :root {
@@ -72,6 +82,30 @@
             color: var(--text-muted);
             margin-top: 10px;
         }
+
+        .status-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            margin-top: 16px;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 15px;
+            font-weight: 700;
+            border: 1px solid var(--border-color);
+            background: var(--box-bg);
+        }
+
+        .status-badge::before {
+            content: "";
+            width: 9px;
+            height: 9px;
+            border-radius: 50%;
+            background: #999;
+        }
+
+        .status-badge.open::before { background: #2fa84f; }
+        .status-badge.closed::before { background: #d9534f; }
 
         /* Sekce 2: Dnes točíme & Ceník zmrzliny */
         .ice-cream-section {
@@ -168,24 +202,16 @@
             margin-bottom: 20px;
         }
 
-        .fb-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 10px;
+        .fb-embed-wrap {
+            display: flex;
+            justify-content: center;
             margin-bottom: 20px;
+            overflow: hidden;
+            border-radius: 8px;
         }
 
-        .fb-placeholder-box {
-            background-color: #eee;
-            aspect-ratio: 1 / 1;
-            border-radius: 8px;
-            border: 1px solid #ddd;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 14px;
-            color: #888;
-            font-style: italic;
+        .fb-embed-wrap iframe {
+            max-width: 100%;
         }
 
         .btn-secondary {
@@ -232,11 +258,8 @@
             background-color: #e5e3df;
             border-radius: 8px;
             height: 180px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            text-align: center;
-            font-size: 16px;
+            display: block;
+            overflow: hidden;
             border: 1px solid #ccc;
         }
 
@@ -291,6 +314,7 @@
             </div>
             <h1>Zmrzka & Espresso u Betléma</h1>
             <div class="subtitle">Poctivá točená zmrzlina a výběrová káva na náměstí v Třebechovicích.</div>
+            <div class="status-badge" id="statusBadge">Zjišťuji otevírací dobu…</div>
         </header>
 
         <!-- 2. DNES TOČÍME & CENY ZMRZLINY -->
@@ -363,22 +387,42 @@
 
         <!-- 4. LIVE FACEBOOK FEED -->
         <section class="facebook-section">
-            <h2>Živě z našeho Facebooku <span>f</span></h2>
-            <div class="fb-grid">
-                <div class="fb-placeholder-box">Foto stánku</div>
-                <div class="fb-placeholder-box">Foto Latte Art</div>
-                <div class="fb-placeholder-box">Dnešní zmrzka</div>
+            <h2>Živě z našeho Facebooku <span></span></h2>
+
+            <!-- Oficiální Facebook Page Plugin - stahuje aktuální fotky a příspěvky přímo z Facebooku,
+                 takže se nemusí nic ručně nahrávat a vždy je to aktuální. -->
+            <div id="fb-root"></div>
+            <div class="fb-embed-wrap">
+                <div class="fb-page"
+                     data-href="https://www.facebook.com/profile.php?id=61591563013534"
+                     data-tabs="timeline"
+                     data-width="500"
+                     data-height="500"
+                     data-small-header="true"
+                     data-adapt-container-width="true"
+                     data-hide-cover="false"
+                     data-show-facepile="false">
+                    <blockquote cite="https://www.facebook.com/profile.php?id=61591563013534" class="fb-xfbml-parse-ignore">
+                        <a href="https://www.facebook.com/profile.php?id=61591563013534" target="_blank" rel="noopener">Zmrzka & Espresso u Betléma</a>
+                    </blockquote>
+                </div>
             </div>
-            <a href="#" class="btn-secondary">Sledujte nás na Facebooku</a>
+
+            <a href="https://www.facebook.com/profile.php?id=61591563013534" target="_blank" rel="noopener" class="btn-secondary">Sledujte nás na Facebooku</a>
         </section>
 
         <!-- 5. KONTAKT & WHATSAPP -->
         <section class="contact-section">
             <h2>Kontakt & WhatsApp</h2>
             <div class="contact-grid">
-                <div class="map-placeholder">
-                    📍 Masarykovo náměstí<br>Třebechovice pod Orebem<br>(Vedle muzea)
-                </div>
+                <a class="map-placeholder" href="https://maps.google.com/?q=Masarykovo+náměstí,+Třebechovice+pod+Orebem" target="_blank" rel="noopener" aria-label="Otevřít mapu v Google Maps">
+                    <iframe
+                        src="https://www.google.com/maps?q=Masarykovo+náměstí,+Třebechovice+pod+Orebem&output=embed"
+                        width="100%" height="100%" style="border:0; border-radius:8px; pointer-events:none;"
+                        loading="lazy" referrerpolicy="no-referrer-when-downgrade"
+                        title="Mapa - Masarykovo náměstí, Třebechovice pod Orebem">
+                    </iframe>
+                </a>
                 <div class="info-box">
                     <h3>Kde nás najdete:</h3>
                     <p>Masarykovo náměstí,<br>Třebechovice pod Orebem</p>
@@ -388,7 +432,8 @@
                 </div>
             </div>
 
-            <a href="https://wa.me/420XXXXXXXXX" class="whatsapp-btn" target="_blank">
+            <!-- ⚠️ Nahraď XXXXXXXXX svým skutečným telefonním číslem (bez mezer, s předvolbou 420) -->
+            <a href="https://wa.me/420XXXXXXXXX" class="whatsapp-btn" target="_blank" rel="noopener">
                 Objednat kávu s sebou / Napište nám na WhatsApp
             </a>
         </section>
@@ -396,10 +441,37 @@
         <!-- LEGISLATIVNÍ PATIČKA -->
         <footer>
             <p>© 2026 Zmrzka & Espresso u Betléma. Všechna práva vyhrazena.</p>
-            <p>Provozovatel: [Tvoje Jméno / Název s.r.o.] | IČO: [Tvoje IČO]</p>
         </footer>
 
     </div>
+
+    <!-- Facebook SDK - vykreslí .fb-page do živého feedu s aktuálními fotkami a příspěvky -->
+    <script async defer crossorigin="anonymous"
+        src="https://connect.facebook.net/cs_CZ/sdk.js#xfbml=1&version=v19.0">
+    </script>
+
+    <script>
+        // Automatický odznak "Otevřeno / Zavřeno" podle otevírací doby (Po-Ne 10:00-18:00)
+        (function () {
+            var badge = document.getElementById('statusBadge');
+            if (!badge) return;
+
+            var OPEN_HOUR = 10;
+            var CLOSE_HOUR = 18;
+
+            var now = new Date();
+            var hour = now.getHours();
+            var isOpen = hour >= OPEN_HOUR && hour < CLOSE_HOUR;
+
+            if (isOpen) {
+                badge.textContent = '🟢 Právě otevřeno · do ' + CLOSE_HOUR + ':00';
+                badge.classList.add('open');
+            } else {
+                badge.textContent = '🔴 Právě zavřeno · otevíráme v ' + OPEN_HOUR + ':00';
+                badge.classList.add('closed');
+            }
+        })();
+    </script>
 
 </body>
 </html>
